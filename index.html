@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <title>Lorem Ispum Generator</title>
+    <style>
+        *,
+        *::after,
+        *::before,
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            max-width: 1400px;
+            padding: 10px 20px;
+            margin: 0 auto;
+            background: radial-gradient(rgba(255, 255, 255, 0) 0,
+                    rgba(255, 255, 255, 0.15) 30%,
+                    rgba(255, 255, 255, 0.3) 32%,
+                    rgba(255, 255, 255, 0) 33%) 0 0,
+                radial-gradient(rgba(255, 255, 255, 0) 0,
+                    rgba(255, 255, 255, 0.1) 11%,
+                    rgba(255, 255, 255, 0.3) 13%,
+                    rgba(255, 255, 255, 0) 14%) 0 0,
+                radial-gradient(rgba(255, 255, 255, 0) 0,
+                    rgba(255, 255, 255, 0.2) 17%,
+                    rgba(255, 255, 255, 0.43) 19%,
+                    rgba(255, 255, 255, 0) 20%) 0 110px,
+                radial-gradient(rgba(255, 255, 255, 0) 0,
+                    rgba(255, 255, 255, 0.2) 11%,
+                    rgba(255, 255, 255, 0.4) 13%,
+                    rgba(255, 255, 255, 0) 14%) -130px -170px,
+                radial-gradient(rgba(255, 255, 255, 0) 0,
+                    rgba(255, 255, 255, 0.2) 11%,
+                    rgba(255, 255, 255, 0.4) 13%,
+                    rgba(255, 255, 255, 0) 14%) 130px 370px,
+                radial-gradient(rgba(255, 255, 255, 0) 0,
+                    rgba(255, 255, 255, 0.1) 11%,
+                    rgba(255, 255, 255, 0.2) 13%,
+                    rgba(255, 255, 255, 0) 14%) 0 0,
+                linear-gradient(45deg,
+                    #343702 0%,
+                    #184500 20%,
+                    #187546 30%,
+                    #006782 40%,
+                    #0b1284 50%,
+                    #760ea1 60%,
+                    #83096e 70%,
+                    #840b2a 80%,
+                    #b13e12 90%,
+                    #e27412 100%);
+            background-size: cover;
+            background-color: #840b2a;
+        }
+
+        .inner_container {
+            width: 100%;
+            height: 100%;
+            background-image: repeating-linear-gradient(-45deg,
+                    orange 0,
+                    transparent 30px,
+                    orangered 30px,
+                    transparent 60px,
+                    orange 120px,
+                    transparent 240px);
+            background-color: orange;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            align-items: stretch;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .heading_row {
+            width: 100%;
+            padding: 10px 20px;
+        }
+
+        .heading_row .title {
+            width: fit-content;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 30px;
+            margin-left: 20px;
+            text-align: left;
+            font-weight: 800;
+            letter-spacing: 1px;
+            animation: titleSlide 1.0s linear alternate-reverse infinite;
+        }
+
+        @keyframes titleSlide {
+            0% {
+                transform: translateX(0) scale(1);
+            }
+
+            100% {
+                transform: translateX(20px) scale(1.5);
+            }
+
+        }
+
+        .recent_messages {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        .recent_messages::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        .input_box {
+            display: flex;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            background: #2f3640;
+            border-radius: 50px;
+            position: relative;
+            bottom: 10px;
+            padding: 5px 0;
+        }
+
+        .searchButton {
+            color: white;
+            position: absolute;
+            right: 8px;
+            width: 40px;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            background: var(--gradient-2, linear-gradient(90deg, #2AF598 0%, #009EFD 100%));
+            border: 0;
+            display: inline-block;
+            transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+        }
+
+        button:hover {
+            color: #fff;
+            background-color: #1A1A1A;
+            box-shadow: rgba(0, 0, 0, 0.5) 0 10px 20px;
+            transform: translateY(-3px);
+        }
+
+        button:active {
+            box-shadow: none;
+            transform: translateY(0);
+        }
+
+        .searchInput {
+            border: none;
+            background: transparent;
+            outline: none;
+            text-wrap: wrap;
+            color: white;
+            width: 100%;
+            font-size: 15px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-weight: 500;
+            padding: 10px 20px;
+        }
+
+        .response,
+        .question {
+            width: max-content;
+            max-width: 930px;
+            clear: both;
+            padding: 10px 20px;
+            background-color: #999;
+            margin: 20px;
+            border-radius: 0px 20px 20px 20px;
+            color: #fff;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-weight: 500;
+        }
+
+        .question {
+            margin-left: 20px;
+            float: right;
+            border-radius: 20px 0px 20px 20px;
+            background-color: #184500;
+        }
+
+        @media screen and (max-width: 992px) {
+
+            .question,
+            .response {
+                max-width: 650px;
+                font-size: 16px;
+            }
+        }
+
+        @media screen and (max-width: 767px) {
+            .container {
+                padding: 10px;
+            }
+
+            .question,
+            .response {
+                width: fit-content;
+                font-size: 14px;
+                margin: 10px 10px;
+            }
+
+            .question {
+                margin-left: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div class="container">
+            <div class="inner_container">
+                <div class="heading_row">
+                    <h2 class="title">Lorem Ipsum</h2>
+                </div>
+                <div class="recent_messages">
+                    <div class="question">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, accusamus.
+                    </div>
+                    <div class="response">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Non vero et optio numquam cupiditate.
+                        Laudantium blanditiis illum quidem modi labore dolorum unde perspiciatis, incidunt perferendis,
+                        sequi aut error omnis laboriosam?
+                    </div>
+                </div>
+                <form class="input_box">
+                    <input class="searchInput" type="number" required placeholder="Number of Lorem Ipsum Words">
+                    <button class="searchButton" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
+                            <g clip-path="url(#clip0_2_17)">
+                                <g filter="url(#filter0_d_2_17)">
+                                    <path
+                                        d="M23.7953 23.9182L19.0585 19.1814M19.0585 19.1814C19.8188 18.4211 20.4219 17.5185 20.8333 16.5251C21.2448 15.5318 21.4566 14.4671 21.4566 13.3919C21.4566 12.3167 21.2448 11.252 20.8333 10.2587C20.4219 9.2653 19.8188 8.36271 19.0585 7.60242C18.2982 6.84214 17.3956 6.23905 16.4022 5.82759C15.4089 5.41612 14.3442 5.20435 13.269 5.20435C12.1938 5.20435 11.1291 5.41612 10.1358 5.82759C9.1424 6.23905 8.23981 6.84214 7.47953 7.60242C5.94407 9.13789 5.08145 11.2204 5.08145 13.3919C5.08145 15.5634 5.94407 17.6459 7.47953 19.1814C9.01499 20.7168 11.0975 21.5794 13.269 21.5794C15.4405 21.5794 17.523 20.7168 19.0585 19.1814Z"
+                                        stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                                        shape-rendering="crispEdges"></path>
+                                </g>
+                            </g>
+                            <defs>
+                                <filter id="filter0_d_2_17" x="-0.418549" y="3.70435" width="29.7139" height="29.7139"
+                                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha">
+                                    </feColorMatrix>
+                                    <feOffset dy="4"></feOffset>
+                                    <feGaussianBlur stdDeviation="2"></feGaussianBlur>
+                                    <feComposite in2="hardAlpha" operator="out"></feComposite>
+                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0">
+                                    </feColorMatrix>
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2_17">
+                                    </feBlend>
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2_17"
+                                        result="shape"></feBlend>
+                                </filter>
+                                <clipPath id="clip0_2_17">
+                                    <rect width="28.0702" height="28.0702" fill="white"
+                                        transform="translate(0.403503 0.526367)"></rect>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <script>
+        const inputField = document.querySelector('.searchInput');
+        const submitButton = document.querySelector('.searchButton');
+        const apiKey = 'cbc656044emsh6dcc21acb6a7c7cp149e49jsn669b02317a7d';
+        const apiUrl = 'https://lorem-ipsum-api.p.rapidapi.com/paragraph?amount=2';
+
+        submitButton.addEventListener('click', async (event) => {
+            const recent_messages = document.querySelector('.recent_messages')
+            const questionEl = document.createElement('div');
+            questionEl.classList.add('question')
+            recent_messages.append(questionEl)
+            const userInput = inputField.value;
+            questionEl.innerHTML = userInput;
+            const responseElement = document.createElement('div');
+            responseElement.classList.add('response')
+            recent_messages.append(responseElement)
+            try {
+                var response = await fetch(apiUrl, {
+                    method: 'GET',
+                    headers: {
+                        'X-RapidAPI-Key': 'cbc656044emsh6dcc21acb6a7c7cp149e49jsn669b02317a7d',
+                        'X-RapidAPI-Host': 'lorem-ipsum-api.p.rapidapi.com'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
+
+                const data = await response.json();
+                responseElement.textContent = data.text;
+            } catch (error) {
+                console.error('Error fetching response:', error);
+                responseElement.textContent = 'Network Error! Check Your Netwrok.';
+            }
+            let clearValue = setTimeout(() => {
+                document.querySelector('input').value = ""
+                clearTimeout(clearValue)
+            }, 50);
+        });
+    </script>
+</body>
+
+</html>
