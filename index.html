@@ -239,7 +239,7 @@
                 </div>
                 <form class="input_box">
                     <input class="searchInput" type="number" required placeholder="Number of Lorem Ipsum Words">
-                    <button class="searchButton" type="button">
+                    <button class="searchButton" type="submit">
                         <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
                             <g clip-path="url(#clip0_2_17)">
                                 <g filter="url(#filter0_d_2_17)">
@@ -282,17 +282,11 @@
         const submitButton = document.querySelector('.searchButton');
         const apiKey = 'cbc656044emsh6dcc21acb6a7c7cp149e49jsn669b02317a7d';
         const apiUrl = 'https://lorem-ipsum-api.p.rapidapi.com/paragraph?amount=2';
-submitButton.addEventListener('click', function () {
+document.querySelector('.input_box').addEventListener('submit', function (event) {
+            event.preventDefault();
             fetchData();
         });
-        inputField.addEventListener('keydown', function (event) {
-            console.log('Key Pressed' + event.key)
-            if (event.key == 'Enter') {
-                event.preventDefault();
-                fetchData();
-                console.log('fetchData invoked!')
-            }
-        })
+        
         let fetchData = async (event) => {
            const recent_messages = document.querySelector('.recent_messages')
             const questionEl = document.createElement('div');
